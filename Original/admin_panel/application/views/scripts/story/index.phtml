@@ -1,0 +1,45 @@
+<?php 
+$data = $this->data;
+if(count($data) == 0)
+{
+	echo 'Chưa có truyện nào';
+}
+else 
+{
+?>
+<table>
+	<tr>
+		<td style="width: 116px;"></td>
+		<td><b>Tên truyện</b></td>
+		<td style="width: 70px; text-align: center;"><b>Tác giả</b></td>
+		<td style="width: 70px; text-align: center;"><b>Số chương</b></td>
+		<td style="text-align: center; width: 30px;"><b>Sửa</b></td>
+		<td style="text-align: center; width: 30px;"><b>Xóa</b></td>
+	</tr>
+	<?php 
+		foreach ($data as $item)
+		{
+			$img = null;
+			if($item[Image] == null)
+			{
+				$img = '<img width="115" height="150 " src="'.$this->imgdir.'/default_story_img.jpg" alt="" />';
+			}
+			else 
+			{
+				$img = '<img width="115" height="150" src="'.$this->root.'/upload/story_images/'.$item[Image].'" alt="" />';	
+			}
+			echo '<tr>';
+			echo '<td>'.$img.'</td>';
+			echo '<td>'.$item[Title].'</td>';
+			echo '<td>'.$item[Author].'</td>';
+			echo '<td>'.$item[Chapters].'</td>';
+			echo '<td style="text-align: center;"><a href="'.$this->baseUrl().'/story/edit/id/'.$item[TruyenID].'"><img src="'.$this->imgdir.'/btn_edit.png" alt="" /></a></td>';
+			echo '<td style="text-align: center;"><a href="'.$this->baseUrl().'/story/delete/id/'.$item[TruyenID].'" onclick="javascript:return DeleteConfirm(0);"><img src="'.$this->imgdir.'/btn_del.png" alt="" /></a></td>';
+			echo '</tr>';
+		}
+	?>
+</table>
+<?php 
+	echo $this->paginationControl($this->data, 'Sliding', 'category/pagination.phtml');
+}
+?>

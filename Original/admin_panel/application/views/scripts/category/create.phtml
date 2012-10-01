@@ -1,0 +1,19 @@
+<?php 
+	if ($this->show_content){
+?>
+	<form method="post" action="<?php echo $this->url();?>">
+	<input type="hidden" name="create" />
+	<table>
+		<tr>
+			<td>Tên thể loại</td>
+			<td><input type="text" name="title" /></td>
+		</tr>
+		<tr>
+			<td style="border: none;padding-top: 10px;padding-left:0;"><input type="submit" value="Tạo" /></td>
+
+		</tr>
+	</table>
+	</form>		
+<?php
+	}
+?>

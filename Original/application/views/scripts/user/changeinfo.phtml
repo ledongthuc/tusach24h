@@ -1,0 +1,27 @@
+			<?php if($this->show_content) {?>
+				<script type="text/javascript" src="<?php echo $this->jsdir; ?>/captcha_run.js"></script>
+				<p class = "main_title">THAY ĐỔI MẬT KHẨU (NOT COMPLETED)</p>
+				<div id="get_pass_wrap">
+					<div id="get_pass">
+						<p id="gp_label">Nhập mật khẩu mới</p>
+						<div><input type="text"id="gp_txt" name="username" /></div>
+						
+						<div class="captcha_wrap">
+							<div class="capt_info">
+								<div class="capt_img" id="recaptcha_image"></div>
+								<div class="capt_right">
+									<div class="capt_mini_btn"><a href="javascript:Recaptcha.switch_type('image');"><img src="<?php echo $this->imgdir; ?>/captcha/c_reload.png" alt="" /></a></div>
+									<div class="capt_mini_btn"><a href="javascript:Recaptcha.switch_type('audio');"><img src="<?php echo $this->imgdir; ?>/captcha/c_audio.png" alt="" /></a></div>
+									<div ><img src="<?php echo $this->imgdir; ?>/captcha/c_ques.png" alt="" /></div>
+								</div>
+							</div>
+							<div class="capt_input_wrap">
+								<input class="capt_input" type="text" id="recaptcha_response_field" name="recaptcha_response_field" />
+							</div>
+						</div>
+						
+						<div><input type="submit" value="" id="gp_btn" /></div>
+					</div>
+				</div>
+				<script type="text/javascript" src="http://api.recaptcha.net/challenge?k=6LfyetQSAAAAAGsmGBMAmCCtoEfXdPRksEnnFFwf"></script>
+				<?php } ?>

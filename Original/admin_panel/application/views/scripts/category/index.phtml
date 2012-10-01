@@ -1,0 +1,29 @@
+<?php 
+$data = $this->data;
+if(count($data) == 0)
+{
+	echo 'Chưa có thể loại nào.';
+}
+else
+{
+?>
+<table>
+	<tr>
+		<td><b>Tên thể loại</b></td>
+		<td style="text-align: center;"><b>Sửa</b></td>
+		<td style="text-align: center;"><b>Xóa</b></td>
+	</tr> 
+	<?php
+		foreach ($data as $item)
+		{
+			echo '<tr>';
+			echo '<td>'.$item[Title].'</td>';
+			echo '<td style="text-align: center;"><a href="'.$this->baseUrl().'/category/edit/id/'.$item[CategoryID].'"><img src="'.$this->imgdir.'/btn_edit.png" alt="" /></a></td>';
+			echo '<td style="text-align: center;"><a href="'.$this->baseUrl().'/category/delete/id/'.$item[CategoryID].'" onclick="javascript:return DeleteConfirm(1);"><img src="'.$this->imgdir.'/btn_del.png" alt="" /></a></td>';
+			echo '</tr>';
+		}
+	?>
+</table>
+<?php 
+	echo $this->paginationControl($this->data, 'Sliding', 'category/pagination.phtml'); }
+?>

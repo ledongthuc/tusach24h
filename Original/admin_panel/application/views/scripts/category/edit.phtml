@@ -1,0 +1,21 @@
+<?php 
+	if($this->show_content)
+	{
+?>
+	<form method="post" action="<?php echo $this->url();?>">
+	<input type="hidden" name="edit" />
+	<input type="hidden" name="id" value="<?php echo $this->id;?>"/>
+	
+	<table>
+		<tr>
+			<td>Tên thể loại</td>
+			<td><input type="text" name="title" value="<?php echo $this->cattitle;?>" /></td>
+		</tr>
+		<tr>
+			<td style="border: none; padding: 10px; padding-left: 0;"><input type="submit" value="Sửa" /></td>
+		</tr>
+	</table>
+	</form>		
+<?php
+	}
+?>

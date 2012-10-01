@@ -1,0 +1,327 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">   
+<html>   
+<head> 
+	<title>Trang chu | tusach24h.com</title>	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<link href="html/css/style.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="html/js/jquery.min.js"></script>
+	<script type="text/javascript" src="html/js/tabs_func.js"></script>
+	<script type="text/javascript" src="html/js/tabs_run.js"></script>  
+	
+		
+</head> 
+<body> 
+    <div id="wrapper">
+		
+		<div id="banner">
+			<div id="slogan">website slogan</div>
+		</div>
+		
+		<div id="menu">
+			<div id="navigation">
+				<ul id="navlist">
+					<li id="home"><a href="/demo/"></a></li>
+					<li id="list"><a href="#list.php"></a></li>
+					<li id="post"><a  class="active" href="#post.php"></a></li>
+					<li id="help"><a href="#help.php"></a></li>
+				</ul>
+			</div>
+			<div id="search_box">
+				<form action="index.html" method="POST" name="frm_search">
+					<input type="text" id="search_input" name="search_input" value="Nhập từ khoá" onfocus="if (this.value == 'Nhập từ khoá' ) {this.value = '';}" onblur="if (this.value == '' ) {this.value = 'Nhập từ khoá';}" />
+					<input type="button" title="button" id="search_button" onclick="frm_search.submit();" />
+				</form>
+			</div>
+		</div>
+		
+		<div id="new_post">
+			<div id="new_post_wrapper">
+				<table>
+					<tr>
+						<td valign="top" align="center">
+							<div class="comic_img">
+								<a href="javascript:void(0);" onclick="ReadBook();"><img src="html/images/idemo.png" alt="" /></a>
+							</div>
+							<div class="comic_info_wrapper">
+								<div class="comic_name"><a href="#">Comic Name</a></div>
+								<div class="tb_hr"></div>
+								<div class="comic_description" >
+									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non diam et lacus pulvinar venenatis et vestibulum velit. Pellentesque interdum faucibus dui.
+								</div>
+								<div class="tb_hr"></div>
+								<div class="comic_chapter">Chapters</div>
+								<div class="comic_author">Author</div>
+								<div class="comic_category">Category</div>
+							</div>
+						</td>
+						<td valign="top" align="center">
+							<div class="comic_img">
+								<a href="javascript:void(0);" onclick="ReadBook();"><img src="html/images/idemo.png" alt="" /></a>
+							</div>
+							<div class="comic_info_wrapper">
+								<div class="comic_name"><a href="#">Comic Name</a></div>
+								<div class="tb_hr"></div>
+								<div class="comic_description" >
+									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non diam et lacus pulvinar venenatis et vestibulum velit. Pellentesque interdum faucibus dui.
+								</div>
+								<div class="tb_hr"></div>
+								<div class="comic_chapter">Chapters</div>
+								<div class="comic_author">Author</div>
+								<div class="comic_category">Category</div>/
+							</div>
+						</td>
+						<td valign="top" align="center">
+							<div class="comic_img">
+								<a href="javascript:void(0);" onclick="ReadBook();"><img src="html/images/idemo.png" alt="" /></a>
+							</div>
+							<div class="comic_info_wrapper">
+								<div class="comic_name"><a href="#">Comic Name</a></div>
+								<div class="tb_hr"></div>
+								<div class="comic_description" >
+									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non diam et lacus pulvinar venenatis et vestibulum velit. Pellentesque interdum faucibus dui.
+								</div>
+								<div class="tb_hr"></div>
+								<div class="comic_chapter">Chapters</div>
+								<div class="comic_author">Author</div>
+								<div class="comic_category">Category</div>
+							</div>
+						</td>
+						<td valign="top" align="center">
+							<div class="comic_img">
+								<a href="javascript:void(0);" onclick="ReadBook();"><img src="html/images/idemo.png" alt="" /></a>
+							</div>
+							<div class="comic_info_wrapper">
+								<div class="comic_name"><a href="#">Comic Name</a></div>
+								<div class="tb_hr"></div>
+								<div class="comic_description" >
+									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non diam et lacus pulvinar venenatis et vestibulum velit. Pellentesque interdum faucibus dui.
+								</div>
+								<div class="tb_hr"></div>
+								<div class="comic_chapter">Chapters</div>
+								<div class="comic_author">Author</div>
+								<div class="comic_category">Category</div>
+							</div>
+						</td>
+						<td valign="top" align="center">
+							<div class="comic_img">
+								<a href="javascript:void(0);" onclick="ReadBook();"><img src="html/images/idemo.png" alt="" /></a>
+							</div>
+							<div class="comic_info_wrapper">
+								<div class="comic_name"><a href="#">Comic Name</a></div>
+								<div class="tb_hr"></div>
+								<div class="comic_description" >
+									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non diam et lacus pulvinar venenatis et vestibulum velit. Pellentesque interdum faucibus dui.
+								</div>
+								<div class="tb_hr"></div>
+								<div class="comic_chapter">Chapters</div>
+								<div class="comic_author">Author</div>
+								<div class="comic_category">Category</div>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		
+		<div id="update">
+			<div id="update_content">
+				Tin tức mới, cập nhật, khuyến mãi,...., consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore....
+			</div>
+			<div id="update_time_posted">
+				about 7 hours ago
+			</div>
+		</div>
+			
+		<div id="content">
+			<div id="leftcol">
+			
+						<p class="main_title">CÁC BỘ TRUYỆN HAY NHẤT</p>
+				
+				<div class="best_comic">
+					<div class="bc_img"><a href="javascript:void(0);" onclick="ReadBook();"><img src="html/images/post_img.png" alt="" /></a></div>
+					<div class="bc_content">
+						<p class="bc_c_title"><a href="javascript:void(0);" onclick="ReadBook();">Tên Truyện</a></p>
+						<p class="bc_c_info">Tác Giả : xxxxxxxxxx   -   Số Chương : xxxxx   -    Thể Loại : xxxxxxxxxx</p>
+						<div class="bc_c_hr"></div>
+						<p class="bc_c_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec risus lectus, nec viverra odio. Ut a diam turpis. Mauris sodales mattis nulla ut feugiat. Maecenas et blandit odio. Ut at pulvinar elit. Nam tristique, tellus rutrum mattis auctor, tortor odio sagittis nunc, eget ultrices purus enim vitae nunc. Donec ultricies massa vel elit feugiat feugiat. Donec auctor dictum auctor....</p>
+					</div>
+				</div>
+				
+				<div class="best_comic">
+					<div class="bc_img"><a href="javascript:void(0);" onclick="ReadBook();"><img src="html/images/post_img.png" alt="" /></a></div>
+					<div class="bc_content">
+						<p class="bc_c_title"><a href="javascript:void(0);" onclick="ReadBook();">Tên Truyện</a></p>
+						<p class="bc_c_info">Tác Giả : xxxxxxxxxx   -   Số Chương : xxxxx   -    Thể Loại : xxxxxxxxxx</p>
+						<div class="bc_c_hr"></div>
+						<p class="bc_c_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec risus lectus, nec viverra odio. Ut a diam turpis. Mauris sodales mattis nulla ut feugiat. Maecenas et blandit odio. Ut at pulvinar elit. Nam tristique, tellus rutrum mattis auctor, tortor odio sagittis nunc, eget ultrices purus enim vitae nunc. Donec ultricies massa vel elit feugiat feugiat. Donec auctor dictum auctor....</p>
+					</div>
+				</div>
+
+				<div class="best_comic">
+					<div class="bc_img"><a href="javascript:void(0);" onclick="ReadBook();"><img src="html/images/post_img.png" alt="" /></a></div>
+					<div class="bc_content">
+						<p class="bc_c_title"><a href="javascript:void(0);" onclick="ReadBook();">Tên Truyện</a></p>
+						<p class="bc_c_info">Tác Giả : xxxxxxxxxx   -   Số Chương : xxxxx   -    Thể Loại : xxxxxxxxxx</p>
+						<div class="bc_c_hr"></div>
+						<p class="bc_c_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec risus lectus, nec viverra odio. Ut a diam turpis. Mauris sodales mattis nulla ut feugiat. Maecenas et blandit odio. Ut at pulvinar elit. Nam tristique, tellus rutrum mattis auctor, tortor odio sagittis nunc, eget ultrices purus enim vitae nunc. Donec ultricies massa vel elit feugiat feugiat. Donec auctor dictum auctor....</p>
+					</div>
+				</div>
+
+				<div class="best_comic">
+					<div class="bc_img"><a href="javascript:void(0);" onclick="ReadBook();"><img src="html/images/post_img.png" alt="" /></a></div>
+					<div class="bc_content">
+						<p class="bc_c_title"><a href="javascript:void(0);" onclick="ReadBook();">Tên Truyện</a></p>
+						<p class="bc_c_info">Tác Giả : xxxxxxxxxx   -   Số Chương : xxxxx   -    Thể Loại : xxxxxxxxxx</p>
+						<div class="bc_c_hr"></div>
+						<p class="bc_c_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec risus lectus, nec viverra odio. Ut a diam turpis. Mauris sodales mattis nulla ut feugiat. Maecenas et blandit odio. Ut at pulvinar elit. Nam tristique, tellus rutrum mattis auctor, tortor odio sagittis nunc, eget ultrices purus enim vitae nunc. Donec ultricies massa vel elit feugiat feugiat. Donec auctor dictum auctor....</p>
+					</div>
+				</div>
+
+				<div class="best_comic">
+					<div class="bc_img"><a href="javascript:void(0);" onclick="ReadBook();"><img src="html/images/post_img.png" alt="" /></a></div>
+					<div class="bc_content">
+						<p class="bc_c_title"><a href="javascript:void(0);" onclick="ReadBook();">Tên Truyện</a></p>
+						<p class="bc_c_info">Tác Giả : xxxxxxxxxx   -   Số Chương : xxxxx   -    Thể Loại : xxxxxxxxxx</p>
+						<div class="bc_c_hr"></div>
+						<p class="bc_c_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec risus lectus, nec viverra odio. Ut a diam turpis. Mauris sodales mattis nulla ut feugiat. Maecenas et blandit odio. Ut at pulvinar elit. Nam tristique, tellus rutrum mattis auctor, tortor odio sagittis nunc, eget ultrices purus enim vitae nunc. Donec ultricies massa vel elit feugiat feugiat. Donec auctor dictum auctor....</p>
+					</div>
+				</div>
+				<p class = "main_title">BANNER QUẢNG CÁO / UPDATE / KHUYẾN MÃI ...</p>
+				<span><img src="html/images/ads1.png" alt="" /></span>
+			</div>
+			<div id="rightcol">
+				<div id="signin_form">
+										<div id="sf_top" class="sf_top">
+						<p class="sf_lable">Tài Khoản</p>
+						<div><input onfocus="if (this.value == 'Administrator' ) {this.value = '';}" type="text" class="signin_text_input" id="signin_username" value="Administrator" /></div>
+						<p class="sf_lable">Mật Khẩu</p>
+						<div><input type="password" class="signin_text_input" id="signin_password" /></div>
+						<div id="wrap_button"><input type="checkbox" id="remember" /> Remember me?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="sf_button" value="" onclick="javascript:SignIn();"></button></div>
+						<div id="signin_status">Đăng kí thành viên để tận hưởng những quyền lợi tốt nhất</div>
+					</div>
+					<div id="sf_bot">
+						<div id="sf_bot_left" class="sf_bot_left"><a href="/user/register">Đăng ký ngay</a></div>
+						<div id="sf_bot_right" class="sf_bot_right"><a href="/user/lostpassword">Quên tài khoản ?</a></div>
+					</div>
+									</div>
+				<div id="top_post">		
+					<ul class="nav">
+						<li class="nav-one captain"><a href="#curr_top" class="current">Top Post</a></li>
+						<li class="nav-two captain"><a href="#week_top">Tuần</a></li>
+						<li class="nav-three captain"><a href="#month_top">Tháng</a></li>
+					</ul>
+					
+					<div class="list-wrap">
+						<ul id="curr_top">
+							<li><a class="class_for_a" href="#">Top post 1</a></li>
+							<li><a class="class_for_a" href="#">Top post 2</a></li>
+							<li><a class="class_for_a" href="#">Top post 3</a></li>
+							<li><a class="class_for_a" href="#">Top post 4</a></li>
+							<li><a class="class_for_a" href="#">Top post 5</a></li>
+						</ul>
+						 
+						 <ul id="week_top" class="hide">
+							<li><a class="class_for_a" href="#">Top week 1</a></li>
+							<li><a class="class_for_a" href="#">Top week 2</a></li>
+							<li><a class="class_for_a" href="#">Top week 3</a></li>
+							<li><a class="class_for_a" href="#">Top week 4</a></li>
+							<li><a class="class_for_a" href="#">Top week 5</a></li>
+						 </ul>
+						 
+						 <ul id="month_top" class="hide">
+							<li><a class="class_for_a" href="#">Top month 1</a></li>
+							<li><a class="class_for_a" href="#">Top month 2</a></li>
+							<li><a class="class_for_a" href="#">Top month 3</a></li>
+							<li><a class="class_for_a" href="#">Top month 4</a></li>
+							<li><a class="class_for_a" href="#">Top month 5</a></li>
+						 </ul>
+					 </div>
+				 </div>
+				 <div id="tp_page"><a href="#"><</a>&nbsp;&nbsp;&nbsp;<a href="#">1</a>&nbsp;&nbsp;&nbsp;<a href="#">2</a>&nbsp;&nbsp;&nbsp;<a href="#">3</a>&nbsp;&nbsp;&nbsp;<a href="#">4</a> ... <a href="#">9</a>&nbsp;&nbsp;&nbsp;<a href="#">10</a>&nbsp;&nbsp;&nbsp;<a href="#">></a></div>
+				<div id="ads_2">
+					<div id="ads_2_top">Cộng đồng blogger | infotruyen@gmail.com</div>
+					<div id="ads_2_bot"><img src="html/images/ads_2.png" alt="" /></div>
+				</div>
+			</div>
+		</div>
+		
+		<div id="top_footer">
+			<div id="fintro">
+				<p class="ftitle">Giới Thiệu</p>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec risus lectus, nec viverra odio. Ut a diam turpis. Mauris sodales mattis nulla ut feugiat. Maecenas et blandit odio. Ut at pulvinar elit. Nam tristique, tellus rutrum mattis auctor, tortor odio sagittis nunc, eget ultrices purus enim vitae nunc. Donec ultricies massa vel elit feugiat feugiat. Donec auctor dictum auctor. Morbi et nisl justo, in semper mi. Ut vulputate, orci ac laoreet venenatis, nisl enim suscipit augue, a convallis dolor purus at leo. </p>
+			</div>
+			<div id="fmenu">
+				<p class="ftitle">Menu</p>
+				<p><a href="#">Trang Chủ</a></p>
+				<div class="f_hr"></div>
+				<p><a href="#">List Truyện</a></p>
+				<div class="f_hr"></div>
+				<p><a href="#">Post Truyện</a></p>
+				<div class="f_hr"></div>
+				<p><a href="#">Hướng Dẫn</a></p>
+			</div>
+			<div id="fsocial">
+				<p class="ftitle">Mạng Xã Hội</p>
+				<div>
+					<a href="https://twitter.com/"><img src="html/images/twister.png" alt="" /></a>
+					<a href="http://www.flickr.com/"><img src="html/images/flickr.png" alt="" /></a>
+					<a href="http://facebook.com/"><img src="html/images/face.png" alt="" /></a>
+					<a href="http://dribbble.com/"><img src="html/images/dribbble.png" alt="" /></a>
+					<a href="http://delicious.com/"><img src="html/images/delicous.png" alt="" /></a>
+					<a href="https://plus.google.com/"><img src="html/images/plus.png" alt="" /></a>
+				</div>
+				<p class="ftitle">Liên Hệ</p>
+				<p>129/6 Nguyễn Trãi, Phường 2, Quận 5, TP. HCM</p>
+				<p>+(083) 923 5684</p>
+				<p>info@gudss.com</p>
+			</div>
+		</div>
+
+		<div id="bot_footer">
+			<div id="copyright">
+				<p>Good Service Seeking Company © All rights reserved</p>
+			</div>
+			<div id="counter">Lượt truy cập: xxxxxxxxxxxxxxx</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		var str = null;
+		function changeRegBox(succ_username)
+		{
+			$('#sf_top').html('<p style="font-size: 18px; font-family: tahoma;">Chào: <span style="color: blue; margin-left: 10px;">'+succ_username+'</span></p><p>Trang thông tin cá nhân</p><p>Truyện yêu thích</p><p>Truyện đã lưu</p><p><a href="#">Đăng truyện</a></p>');
+			$('#sf_top').removeClass().addClass('sf_top_logged');
+			$('#sf_bot_left').html('<a href="/user/changeinfo">Đổi mật khẩu</a>');
+			$('#sf_bot_right').html('<a href="/user/logout">Đăng xuất</a>');
+		}
+		function PostBackSignin(source){
+			$.ajax({
+				url:"/user/login",
+				type:"POST",
+				async:false,
+				data:source,
+				success:function(result){
+					str = result;
+				},
+				error:function(){
+					alert("Lỗi kết nối!");
+				}
+			});
+			return str;
+		}
+		function SignIn()
+		{
+			$('#signin_status').html('<img src="html/images/loading.gif" alt="" />');
+			var login_result = PostBackSignin('username='+$('#signin_username').val()+'&password='+$('#signin_password').val()+'&login_postback=1');
+			if(login_result == 0)
+			{
+				$('#signin_status').css('color', 'red');
+				$('#signin_status').html('Tên đăng nhập hoặc mật khẩu không đúng.');
+			}
+			else
+			{
+				changeRegBox(login_result);
+			}
+		}
+	</script>
+</body> 
+</html>

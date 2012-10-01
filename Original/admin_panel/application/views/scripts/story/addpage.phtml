@@ -1,0 +1,186 @@
+
+<?php 
+if($this->show_content)
+{
+?>
+	<form id="addpage" name="addpage" action="<?php echo $this->url();?>" method="post">
+		<div style="text-align: left;margin-bottom: 10px;"><b>Chọn truyện: </b><select name="storyid" id="storyid" style="width: 200px;">
+		<option value=""></option>
+		<?php 
+	 		$addpage = new Model_Story();
+			$data = $addpage->ListAll();
+			foreach ($data as $row)
+			{
+				echo '<option value="'.$row["TruyenID"].'">'.$row["Title"].'</option>';
+			}
+		?>
+		</select><span id="story_error"></span>
+		</div>
+		<div style="text-align: left;margin-bottom: 10px;">
+		<span style="margin-right: 28px;font-weight: bold;">Chương:</span>
+		<select name="chapters" id="chapters" style="width: 200px;">
+			<option value=""></option>
+		</select><span id="chapters_error"></span>
+		</div>
+		<div style="text-align:left;font-weight:bold; margin-bottom: 10px;">
+			Kích thước khung soạn thảo bằng với trang truyện, chú ý soạn thảo sao cho không để xuất hiện thanh thước cuộn.
+		</div>
+		<div style="margin: 0 auto; width: 502px;">
+			<textarea id="editor1" name="editor1" rows="10"></textarea>
+		</div>
+		<div id="editor1_error"></div>
+	</form>
+	<button onclick="CreatePage();">Thêm</button>
+<script type="text/javascript" src="http://zend:2002/admin_panel/html/ckeditor/ckeditor_basic.js"></script>
+<script type="text/javascript">
+			function IframeNode()
+			{
+				node = $('iframe').get(0);
+				//alert(node.getAttribute('title'));
+				//node = document.getElementsByTagName("iframe")[0];
+				node1 = node.setAttribute('id', 'iframe100');
+				node.scrolling = "auto";
+			}
+			function isIE() {
+				return navigator.userAgent.indexOf('MSIE')!=-1;
+			}
+			function isChrome() {
+				return navigator.userAgent.indexOf('Chrome')!=-1;
+			}
+			function getnode()
+			{
+				//alert($('#iframe100').get(0).scrolling);
+				//alert($('#iframe100').get(0).clientHeight);
+				//alert($('#iframe100').innerHeight);
+				//alert($('#iframe100')[scrollTop(0)]);
+				frameId = "iframe100";
+				frame = document.getElementById(frameId);
+		        innerDoc = (frame.contentDocument) ? frame.contentDocument : frame.contentWindow.document;
+				alert(innerDoc.body.scrollHeight);
+			}
+			
+			var str = "";
+			function GetChapters(storyid)
+			{
+				var result = PostBack('func=getchapters&storyid='+$('#storyid').val());
+				if(result!=null)
+				{
+					$('#chapters').children().remove().end().append('<option selected value=""></option>') ;
+					for(var i=1;i<=result;i++)
+					{
+						$('#chapters').append('<option value="'+i+'" selected="selected">Chương '+i+'</option>');
+					}
+				}
+			}
+			function CreatePage()
+			{
+				$storyid = $('#storyid').val();
+				$chapter = $('#chapters').val();
+				if($storyid == "")
+				{
+					$('#story_error').html('<img src="<?php echo $this->imgdir;?>/error.png" title="Bạn phải chọn truyện." alt="" />');
+				}
+				else
+				{
+					$('#story_error').html('');
+				}
+				if($chapter == "")
+				{
+					$('#chapters_error').html('<img src="<?php echo $this->imgdir;?>/error.png" title="Bạn phải chọn chương." alt="" />');
+				}
+				else
+				{
+					$('#chapters_error').html('');
+				}
+				if(getCurrentCount()==0)
+				{
+					$('#editor1_error').html('<img src="<?php echo $this->imgdir;?>/error.png" title="Nội dung trang không thể trống." alt="" />');
+				}
+				else
+				{
+					$('#editor1_error').html('');
+				}
+				
+				if($storyid == "")
+				{
+					return false;
+				}
+				else if($chapter == "")
+				{
+					return false;
+				}
+				else if(getCurrentCount()==0)
+				{
+					return false;
+				}
+				else
+				{
+					document.forms['addpage'].submit();
+				}
+				
+				//
+			}
+			function getCurrentCount()
+			{
+				var oEditor = CKEDITOR.instances.editor1;
+				var clength = oEditor.getData()
+					.replace(/<[^>]*>/g, '')
+					.replace(/\s+/g, ' ')
+					.replace(/&\w+;/g ,'X')
+					.replace(/^\s*/g, '')
+					.replace(/\s*$/g, '')
+					.length;
+			 	return clength;
+			}
+			function PostBack(source){
+				$.ajax({
+					url:"<?php echo $this->url(); ?>",
+					type:"POST",
+					async:false,
+					data:source,
+					success:function(result){
+						str = result;
+					},
+					error:function(){
+						alert("Lỗi kết nối!");
+					}
+				});
+				return str;
+			}
+			
+			CKEDITOR.replace( 'editor1',
+			{
+				skin : 'v2',
+				height: (isIE())?"435":"475",
+				width: "500",
+				coreStyles_bold	: { element : 'b' },
+				coreStyles_italic : { element : 'i' },
+				toolbar :
+				[
+					{ name: 'document', items : [ 'Source','-','NewPage','Preview', 'Print','-','Templates' ] },
+					{ name: 'clipboard', items : [ 'Undo','Redo' ] },
+					{ name: 'editing', items : [ 'Find','Replace','-','SelectAll' ] },
+					{ name: 'insert', items : [ 'Table','HorizontalRule','SpecialChar'  ]},
+							'/',
+					{ name: 'styles', items : [ 'Styles', 'Format', 'Font' ] },
+					'/',
+					{ name: 'basicstyles', items : [ 'FontSize','-', 'Bold','Italic','Strike','-','RemoveFormat' ] },
+					{ name: 'colors', items : [ 'TextColor','BGColor' ] },
+					{ name: 'paragraph', items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote' ] },
+					{ name: 'justify', items : [ 'JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock' ] },
+					{ name: 'tools', items : [ 'Maximize', 'CharCount' ]}
+				]
+				
+			});
+			
+			//IframeNode();
+			$(window).ready(function(){
+				GetChapters($('#storyid'));
+				$('#storyid').change(function(){
+					GetChapters($('#storyid'));
+				});
+				setTimeout(function(){IframeNode();},1000);
+			});
+		</script>
+		
+<?php }?>

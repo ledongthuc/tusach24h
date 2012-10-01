@@ -1,0 +1,306 @@
+			<?php if($this->show_content) {?>
+			<script type="text/javascript" src="<?php echo $this->jsdir; ?>/jquery-ui.min.js"></script>
+			<script type="text/javascript" src="<?php echo $this->jsdir; ?>/captcha_run.js"></script>
+			<script type="text/javascript" src="<?php echo $this->jsdir; ?>/combobox_run.js"></script>  
+			<p class = "main_title">ĐĂNG KÝ TÀI KHOẢN</p>
+				<div id="register_wrap">
+					<div id="register">
+						<p class="reg_label">tên đăng nhập</p>
+						<div style="overflow: hidden;">
+							<div class="iew_left"><input type="text" class="reg_txt" id="username" name="username" onblur="javascript:CheckUsername(this.value);"/></div>
+							<div class="iew_img" id="username_img_error"></div>
+							<div class="iew_text" id="username_text_error"></div>
+						</div>
+						
+						<p class="reg_label">Mật Khẩu</p>
+						<div style="overflow: hidden;">
+							<div class="iew_left"><input type="password" class="reg_txt" id="password" name="password" onblur="javascript:CheckStringLength('password', 'Mật Khẩu', this.value, 6, 32);" /></div>
+							<div class="iew_img" id="password_img_error"></div>
+							<div class="iew_text" id="password_text_error"></div>
+						</div>
+						
+						<p class="reg_label">Nhập lại mật khẩu</p>
+						<div style="overflow: hidden;">
+							<div class="iew_left"><input type="password" class="reg_txt" id="repassword" name="repassword" onblur="javascript:CheckRepasswordMatch();" /></div>
+							<div class="iew_img" id="repassword_img_error"></div>
+							<div class="iew_text" id="repassword_text_error"></div>
+						</div>
+						
+						<p class="reg_label">Email</p>
+						<div class="input_error_wrap">
+							<div class="iew_left"><input type="text" class="reg_txt" id="email" name="email" onblur="javascript:CheckEmail(this.value);" /></div>
+							<div class="iew_img" id="email_img_error"></div>
+							<div class="iew_text" id="email_text_error"></div>
+						</div>
+						
+						<p class="reg_label">Giới tính</p>
+						<div class="input_error_wrap">
+							
+							<div class="iew_left">
+								<select id="sex" name="sex">
+									<option value="0" selected>Chọn giới tính</option>
+									<option value="1">Nữ</option>
+									<option value="2">Nam</option>
+									<option value="3">Không xác định</option>
+								</select>
+							</div>
+							
+							<div class="iew_img" id="sex_img_error"></div>
+							<div class="iew_text" id="sex_text_error"></div>
+							
+						</div>
+						
+						
+						<div class="input_error_wrap">
+							<div class="iew_left">
+								<div class="captcha_wrap">
+									<div class="capt_info">
+										<div class="capt_img" id="recaptcha_image"></div>
+										<div class="capt_right">
+											<div class="capt_mini_btn"><a id="refresh_captcha" href="javascript:Recaptcha.switch_type('image');"><img src="<?php echo $this->imgdir; ?>/captcha/c_reload.png" alt="" /></a></div>
+											<div class="capt_mini_btn"><a href="javascript:Recaptcha.switch_type('audio');"><img src="<?php echo $this->imgdir; ?>/captcha/c_audio.png" alt="" /></a></div>
+											<div><img src="<?php echo $this->imgdir; ?>/captcha/c_ques.png" alt="" /></div>
+										</div>
+									</div>
+									<div class="capt_input_wrap">
+										<input class="capt_input" type="text" id="recaptcha_response_field" name="recaptcha_response_field" id="recaptcha_response_field" onblur="CheckCaptcha();"/>
+									</div>
+								</div>
+							</div>
+							<div class="iew_img" id="captcha_img_error"></div>
+							<div class="iew_text" id="captcha_text_error"></div>
+						</div>
+						
+						<div class="input_error_wrap">
+							<div class="iew_left">
+								<input type="checkbox" id="agree" name="agree" onclick="javascript:CheckAgree();"/>&nbsp;&nbsp;&nbsp;Tôi đã đọc và đồng ý <a href="#" style="color: blue; text-decoration: underline;">các điều khoản</a>
+							</div>
+							<div class="iew_img" id="agree_img_error"></div>
+							<div class="iew_text" id="agree_text_error"></div>
+						</div>
+						
+						<div><button id="reg_btn" name="submit" onclick="javascript:RegCompleted();"></button><span style="margin-left: 20px;" id="submit_loading"></span></div>
+					</div>
+				</div>
+				<script type="text/javascript" src="http://api.recaptcha.net/challenge?k=6LfyetQSAAAAAGsmGBMAmCCtoEfXdPRksEnnFFwf"></script>
+				<script type='text/javascript'>
+				 $(function(){
+			         $("#sex" ).combobox();
+			         $("#sex").change(function() {
+			        	 if($("#sex").val() == '0')
+							{
+								$('#sex_img_error').html('<img src="<?php echo $this->imgdir; ?>/error.png" />');
+								$('#sex_text_error').html('Bạn vui lòng chọn giới tính.');
+								return false;
+							}
+							else
+							{
+								$('#sex_img_error').html('<img src="<?php echo $this->imgdir; ?>/ok.png" />');
+								$('#sex_text_error').html('');
+								return true;
+							}
+			         });
+			     	});
+				
+					var str = "";
+					function PostBack(source){
+						$.ajax({
+							url:"<?php echo $this->url(); ?>",
+							type:"POST",
+							async:false,
+							data:source,
+							success:function(result){
+								str = result;
+							},
+							error:function(){
+								alert("Lỗi kết nối!");
+							}
+						});
+						return str;
+					}
+					
+					function CheckStringLength(id, id_name, string, min, max)
+					{
+						if((string.length < min) || (string.length > max))
+						{
+							$('#' + id + '_img_error').html('<img src="<?php echo $this->imgdir; ?>/error.png" />');
+							$('#' + id + '_text_error').html(id_name + ' phải từ ' + min + '   đến ' + max + ' kí tự.');
+							return false;
+						}
+						else
+						{
+							$('#' + id + '_img_error').html('<img src="<?php echo $this->imgdir; ?>/ok.png" />');
+							$('#' + id + '_text_error').html('');
+							return true;
+						}
+					}
+					function CheckUsername(username)
+					{
+						if(!CheckStringLength('username', 'Tên đăng nhập', username, 6, 32))
+						{
+							return false
+						}
+						else if(PostBack('func=check_username_format&username=' + $("#username").val()) == 0)
+						{
+							$('#username_img_error').html('<img src="<?php echo $this->imgdir; ?>/error.png" />');
+							$('#username_text_error').html('Bạn chỉ được nhập (a-z, 0-9, _)');
+							return false;
+						}
+						else if(PostBack('func=check_username_available&username=' + $("#username").val()) == 0)
+						{
+							$('#username_img_error').html('<img src="<?php echo $this->imgdir; ?>/error.png" />');
+							$('#username_text_error').html('Tên đăng nhập này đã có người sử dụng.');
+							return false;
+						}
+						else
+						{
+							$('#username_img_error').html('<img src="<?php echo $this->imgdir; ?>/ok.png" />');
+							$('#username_text_error').html('');
+							return true;
+						}
+					}
+					function CheckRepasswordMatch()
+					{
+						if($('#password').val() != $('#repassword').val())
+						{
+							$('#repassword_img_error').html('<img src="<?php echo $this->imgdir; ?>/error.png" />');
+							$('#repassword_text_error').html('Nhập lại mật khẩu không đúng.');
+							return false;
+						}
+						else if(!CheckStringLength('password', 'Mật Khẩu', $('#password').val(), 6, 32))
+						{
+							$('#repassword_img_error').html('<img src="<?php echo $this->imgdir; ?>/error.png" />');
+							$('#repassword_text_error').html('Vui lòng nhập mật mẩu.');
+							return false;
+						}
+						else
+						{
+							$('#repassword_img_error').html('<img src="<?php echo $this->imgdir; ?>/ok.png" />');
+							$('#repassword_text_error').html('');
+							return true;
+						}
+						
+					}
+					function CheckEmail(email)
+					{
+						if(PostBack('func=check_email&email=' + email) == 0)
+						{
+							$('#email_img_error').html('<img src="<?php echo $this->imgdir; ?>/error.png" />');
+							$('#email_text_error').html('Email không hợp lệ.');
+							return false;
+						}
+						else if(PostBack('func=check_email_available&email=' + email) == 0)
+						{
+							$('#email_img_error').html('<img src="<?php echo $this->imgdir; ?>/error.png" />');
+							$('#email_text_error').html('Email này đã có người sử dụng.');
+							return false;
+						}
+						else
+						{
+							$('#email_img_error').html('<img src="<?php echo $this->imgdir; ?>/ok.png" />');
+							$('#email_text_error').html('');
+							return true;
+						}
+					}
+					function CheckSex()
+					{
+						if($("#sex option:selected").val() == '0')
+						{
+							$('#sex_img_error').html('<img src="<?php echo $this->imgdir; ?>/error.png" />');
+							$('#sex_text_error').html('Bạn vui lòng chọn giới tính.');
+							return false;
+						}
+						else
+						{
+							$('#sex_img_error').html('<img src="<?php echo $this->imgdir; ?>/ok.png" />');
+							$('#sex_text_error').html('');
+							return true;
+						}
+					}
+					function CheckCaptcha()
+					{
+						$('#captcha_img_error').html('<img src="<?php echo $this->imgdir; ?>/loading.gif" />');
+						
+						if($('#recaptcha_response_field').val() == "")
+						{
+							$('#captcha_img_error').html('<img src="<?php echo $this->imgdir; ?>/error.png" />');
+							return false;
+						}
+						else if(PostBack('func=check_captcha&response=' + $("#recaptcha_response_field").val() + '&challenge=' + $('#recaptcha_challenge_field').val()) == 0)
+						{
+							$('#captcha_img_error').html('<img src="<?php echo $this->imgdir; ?>/error.png" />');
+							return false;
+						}
+						else
+						{
+							$('#captcha_img_error').html('<img src="<?php echo $this->imgdir; ?>/ok.png" />');
+							
+							$('#captcha_text_error').html('');
+							$('#refresh_captcha').removeAttr('href');
+							return true;
+						}
+					}
+					function CheckAgree()
+					{
+						if(!$('#agree').is(':checked'))
+						{
+							$('#agree_img_error').html('<img src="<?php echo $this->imgdir; ?>/error.png" />');
+							return false;
+						}
+						else
+						{
+							$('#agree_img_error').html('<img src="<?php echo $this->imgdir; ?>/ok.png" />');
+							return true;
+						}
+					}
+					function RegCompleted()
+					{
+						$('#submit_loading').html('<img src="<?php echo $this->imgdir; ?>/loading.gif" alt="" />');
+						//alert(window.location.href);
+						//Recaptcha.switch_type('image');
+						CheckUsername($('#username').val());
+						CheckStringLength('password', 'Mật Khẩu', $('#password').val(), 6, 32);
+						CheckRepasswordMatch();
+						CheckEmail($('#email').val());
+						CheckAgree();
+						CheckSex();
+						CheckCaptcha();
+						//alert(PostBack('func=getstatus'));
+
+						  	if(
+								CheckUsername($('#username').val()) &&
+								CheckStringLength('password', 'Mật Khẩu', $('#password').val(), 6, 32) &&
+								CheckRepasswordMatch() && 
+								CheckEmail($('#email').val()) &&
+								CheckSex() &&
+								CheckCaptcha() &&
+								CheckAgree()
+							)
+						  	{
+							  	var username = $('#username').val();
+							  	var password = $('#password').val();
+							  	var repassword = $('#repassword').val();
+							  	var email = $('#email').val();
+							  	var sex = $('#sex').val();
+							  	var agree = $('#agree').val();
+							 	if(PostBack('func=reg_completed&username=' + username + '&password=' + password + '&repassword=' + repassword + '&email=' + email + '&sex=' + sex + '&agree=' + agree) == 1)
+							 	{
+							 		$('#submit_loading').html('<img src="<?php echo $this->imgdir; ?>/ok.png" alt="" />');
+								 	alert('Đăng ký thành công');
+								 	window.location = "<?php echo $this->baseurl; ?>/user/";
+								}
+							 	else
+							 	{
+							 		$('#submit_loading').html('<img src="<?php echo $this->imgdir; ?>/error.png" alt="" />');
+								 	alert('Đăng ký thất bại');
+								}			 	
+						  	}
+						  	else
+						  	{
+						  		$('#submit_loading').html('');
+						  	}
+					}
+					
+				</script>
+			
+				<?php } ?>

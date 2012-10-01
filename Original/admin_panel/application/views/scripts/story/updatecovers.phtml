@@ -1,0 +1,93 @@
+<?php 
+	if ($this->show_content){
+?>
+<script type="text/javascript" src="<?php echo $this->root?>/html/uploadify/upload.js"></script>
+<link rel="stylesheet" href="<?php echo $this->root?>/html/uploadify/upload.css" type="text/css" media="screen, projection" />
+<script type="text/javascript">
+$(window).ready(function() {
+	InitUpload('c_f_o');
+	InitUpload('c_f_i');
+	InitUpload('c_b_o');
+	InitUpload('c_b_i');
+});
+function ClearImg(field_id)
+{
+    $('#'+field_id+'_field').html('<input type="file" name="'+field_id+'" id="'+field_id+'" />');
+	InitUpload(field_id);
+}
+function InitUpload(field_id)
+{
+	$('#'+field_id).uploadify({
+        'swf'      : '<?php echo $this->root?>/html/uploadify/upload.swf',
+        'uploader' : '<?php echo $this->root?>/html/uploadify/upload_covers.php',
+		'cancelImg':'cancel.png',
+		'folder':'upload',
+		'auto':true,
+		'multi': false,
+		'fileTypeDesc' : 'File ảnh',
+        'fileTypeExts' : '*.gif; *.jpg; *.png; *.jpeg', 
+		'onUploadSuccess' : function(file, data, response) {
+        //alert('The file ' + file.name + ' was successfully uploaded with a response of ' + response + ':' + data);
+			//0: type is invalid
+			//1: size > 1Mb
+			//2: file exist
+			if(data == 0)
+			{
+				$('#'+field_id+'_field').html('Ảnh không hợp lệ. <div style="float: right;"><a href="#"><img src="<?php echo $this->imgdir;?>/btn_del.png" alt="" onclick="javascript:DeleteImg();" title="xóa ảnh"/></a></div>');
+			} 
+			else if(data == 1)
+			{
+				$('#'+field_id+'_field').html('Ảnh của bạn phải nhỏ hơn 1Mb. <div style="float: right;"><a href="#"><img src="<?php echo $this->imgdir;?>/btn_del.png" alt="" onclick="javascript:DeleteImg();" title="xóa ảnh"/></a></div>');
+			} 
+			else if(data == 2)
+			{
+				$('#'+field_id+'_field').html('Ảnh này đã tồn tại. <div style="float: right;"><a href="#"><img src="<?php echo $this->imgdir;?>/btn_del.png" alt="" onclick="javascript:DeleteImg();" title="xóa ảnh"/></a></div>');
+			} 
+			else
+			{
+				
+				clear_img = 'javascript:ClearImg("'+field_id+'");';
+				$('#'+field_id+'_field').html('<img width="100" src="<?php echo $this->root;?>/upload/story_covers/' + data + '" alt="" /><input type="hidden" value="'+field_id+'" id="'+field_id+'_position" name="'+field_id+'_position"/><input type="hidden" value="'+data+'" id="'+field_id+'_source" name="'+field_id+'_source"/><div style="float: right;"><a href="#" onclick='+clear_img+'><img src="<?php echo $this->imgdir;?>/btn_del.png" alt="" title="xóa ảnh"/></a></div>');
+			}
+		} 
+    });
+}
+</script>
+<p style="text-align:left;font-weight:bold;margin-bottom:10px;">Bìa truyện gồm 4 mặt, mỗi mặt có chiều rộng cao tương ứng 480 x 600 (pixel)</p>
+<form action="<?php $this->url();?>" method="post">
+<div style="text-align: left;margin-bottom: 10px;"><b>Chọn truyện: </b>
+	<select name="storyid" id="storyid" style="width: 200px; height: 21px;">
+		<?php 
+	 		$addpage = new Model_Story();
+			$data = $addpage->ListAll();
+			foreach ($data as $row)
+			{
+				echo '<option value="'.$row["TruyenID"].'">'.$row["Title"].'</option>';
+			}
+		?>
+	</select>
+</div>
+
+<table>
+	<tr>
+		<td style="width: 150px;font-weight:bold;">Bìa trước ngoài</td>
+		<td><span id="c_f_o_field"><input type="file" name="c_f_o" id="c_f_o" /></span></td>
+	</tr>
+	<tr>
+		<td style="width: 150px;font-weight:bold;">Bìa trước trong</td>
+		<td><span id="c_f_i_field"><input type="file" name="c_f_i" id="c_f_i" /></span></td>
+	</tr>
+	<tr>
+		<td style="width: 150px;font-weight:bold;">Bìa sau ngoài</td>
+		<td><span id="c_b_o_field"><input type="file" name="c_b_o" id="c_b_o" /></span></td>
+	</tr>
+	<tr>
+		<td style="width: 150px;font-weight:bold;">Bìa sau trong</td>
+		<td><span id="c_b_i_field"><input type="file" name="c_b_i" id="c_b_i" /></span></td>
+	</tr>
+</table>
+<input type="submit" value="Tạo" />
+</form>
+<?php
+	}
+?>

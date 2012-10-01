@@ -1,0 +1,224 @@
+	<?php 
+	if ($this->show_content){
+	?>
+	<script type="text/javascript" src="<?php echo $this->root?>/html/uploadify/upload.js"></script>
+	<link rel="stylesheet" href="<?php echo $this->root?>/html/uploadify/upload.css" type="text/css" media="screen, projection" />
+	<script type="text/javascript">
+		//var img_key = 
+		var img_path = null;
+		$(function() {
+			InitUpload();
+	    });
+		
+	    function InitUpload()
+	    {
+	    	$('#image_upload').uploadify({
+	            'swf'      : '<?php echo $this->root?>/html/uploadify/upload.swf',
+	            'uploader' : '<?php echo $this->root?>/html/uploadify/upload.php',
+				'cancelImg':'cancel.png',
+				'folder':'upload',
+				'auto':true,
+				'multi': false,
+				'fileTypeDesc' : 'File ảnh',
+		        'fileTypeExts' : '*.gif; *.jpg; *.png; *.jpeg', 
+				'onUploadSuccess' : function(file, data, response) {
+	            //alert('The file ' + file.name + ' was successfully uploaded with a response of ' + response + ':' + data);
+					//0: type is invalid
+					//1: size > 500kb
+					//2: file exist
+					if(data == 0)
+					{
+						$('#img_field').html('Ảnh không hợp lệ. <div style="float: right;"><a href="#"><img src="<?php echo $this->imgdir;?>/btn_del.png" alt="" onclick="javascript:DeleteImg();" title="xóa ảnh"/></a></div>');
+					} 
+					else if(data == 1)
+					{
+						$('#img_field').html('Ảnh của bạn phải nhỏ hơn 200Kb. <div style="float: right;"><a href="#"><img src="<?php echo $this->imgdir;?>/btn_del.png" alt="" onclick="javascript:DeleteImg();" title="xóa ảnh"/></a></div>');
+					} 
+					else if(data == 2)
+					{
+						$('#img_field').html('Ảnh này đã tồn tại. <div style="float: right;"><a href="#"><img src="<?php echo $this->imgdir;?>/btn_del.png" alt="" onclick="javascript:DeleteImg();" title="xóa ảnh"/></a></div>');
+					} 
+					else
+					{
+						$('#img_field').html('<img width="115" src="<?php echo $this->root;?>/upload/story_images/' + data + '" alt="" /><input type="hidden" value="'+data+'" id="image" name="image"/><div style="float: right;"><a href="#"><img src="<?php echo $this->imgdir;?>/btn_del.png" alt="" onclick="javascript:DeleteImg();" title="xóa ảnh"/></a></div>');
+					}
+				} 
+	        });
+		}
+	    function DeleteImg(path)
+	    {
+		    $('#img_field').html('<input type="file" name="image_upload" id="image_upload" />');
+	    	//PostBack('func=del_img&id='+img_path+'&img_key='+img_key);
+	    	InitUpload();
+		}
+	</script>
+	<input type="hidden" name="create" />
+	<table>
+		<tr>
+			<td>Tên truyện</td>
+			<td><input type="text" name="title" id="title"/>  <span id="title_error"></span></td>
+		</tr>
+		<tr>
+			<td>Hình truyện</td>
+			<td><span id="img_field"><input type="file" name="image_upload" id="image_upload" /></span><span id="image_error"></span> </td>
+		</tr>
+		<tr>
+			<td>Thể loại</td>
+			<td><select name="category" id="category" style="width: 145px;height: 21px;">
+			<?php 
+				$cat_for_create = new Model_Story();
+				$data = $cat_for_create->ListCategory();
+				foreach ($data as $row)
+				{
+					echo '<option value="'.$row['CategoryID'].'">'.$row['Title'].'</option>';
+				}
+			?>
+			</select></td>
+		</tr>
+		<tr>
+			<td>Tác giả</td>
+			<td><input type="text" name="author" id="author" />  <span id="author_error"></span></td>
+		</tr>
+		<tr>
+			<td>Sơ lượt nội dung</td>
+			<td><textarea style="width: 70%;" name="description" id="description"></textarea>  <span id="description_error"></span></td>
+		</tr>
+		<tr>
+			<td>Số chương</td>
+			<td><input type="text" name="chapters" id="chapters"/>  <span id="chapters_error"></span></td>
+		</tr>
+		<tr>
+			<td style="border: none;padding-top: 10px;padding-left:0;">  <button onclick="Validate();">Tạo</button></td>
+
+		</tr>
+	</table>
+	
+	<script type="text/javascript">
+		var str = "";
+		function PostBack(source){
+			$.ajax({
+				url:"<?php echo $this->url(); ?>",
+				type:"POST",
+				async:false,
+				data:source,
+				success:function(result){
+					str = result;
+				},
+				error:function(){
+					alert("Lỗi kết nối!");
+				}
+			});
+			return str;
+		}
+		function CheckBlank(id)
+		{
+			if($('#'+id).val() == "")
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		function isInteger(s)
+		{
+		    return Math.ceil(s) == Math.floor(s);
+		}
+		function Validate()
+		{
+			if(CheckBlank('title'))
+			{
+				$('#title_error').html('<img src="<?php echo $this->imgdir;?>/error.png" title="Tên truyện không thể rỗng" alt="">');	
+			}
+			else
+			{
+				$('#title_error').html('');
+			}
+			if(CheckBlank('image'))
+			{
+				$('#image_error').html('<img src="<?php echo $this->imgdir;?>/error.png" title="Hình truyện không thể rỗng" alt="">');	
+			}
+			else
+			{
+				$('#image_error').html('');
+			}
+			if(CheckBlank('author'))
+			{
+				$('#author_error').html('<img src="<?php echo $this->imgdir;?>/error.png" title="Tác giả không thể rỗng" alt="">');	
+			}
+			else
+			{
+				$('#author_error').html('');
+			}
+			if(CheckBlank('description'))
+			{
+				$('#description_error').html('<img src="<?php echo $this->imgdir;?>/error.png" title="Sơ lượt nội dung không thể rỗng" alt="">');	
+			}
+			else
+			{
+				$('#description_error').html('');
+			}
+			if(CheckBlank('chapters'))
+			{
+				$('#chapters_error').html('<img src="<?php echo $this->imgdir;?>/error.png" title="Số chương không thể rỗng" alt="">');	
+			}
+			else if(!isInteger($('#chapters').val()))
+			{
+				$('#chapters_error').html('<img src="<?php echo $this->imgdir;?>/error.png" title="Chương phải là số" alt="">');
+			}
+			else
+			{
+				$('#chapters_error').html('');
+			}
+			if(CheckBlank('title'))
+			{
+				return false;
+			}
+			else if(CheckBlank('image'))
+			{
+				return false;
+			}
+			else if(CheckBlank('author'))
+			{
+				return false;
+			}
+			else if(CheckBlank('description'))
+			{
+				return false;
+			}
+			else if(CheckBlank('chapters'))
+			{
+				return false;
+			}
+			else if(!isInteger($('#chapters').val()))
+			{
+				return false;
+			}
+			else
+			{
+				var title = $('#title').val();
+				var image = $('#image').val();
+				var author = $('#author').val();
+				var category = $('#category').val();
+				var description = $('#description').val();
+				var chapters = $('#chapters').val();
+				var result = PostBack('func=create&title='+title+'&image='+image+'&author='+author+'&category='+category+'&description='+description+'&chapters='+chapters);
+				if(result==1)
+				{
+					$('#content').html('Tạo truyện thành công');
+				}
+				else if(result==2)
+				{
+					$('#content').html('Truyện này đã tồn tại');
+				}
+				else
+				{
+					$('#content').html('Lỗi');
+				}
+			}
+		}
+	</script>	
+<?php
+	}
+?>

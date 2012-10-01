@@ -1,0 +1,17 @@
+<form action="<?php echo $this->root;?>/story/uploadprocess" method="post"
+enctype="multipart/form-data">
+<div style="padding-left: 130px;text-align: left;margin-bottom: 5px;">Chọn truyện: <select style="height: 21px;width: 150px;" name="story">
+<?php 
+	$upload = new Model_Story();
+	$data = $upload->ListAll();
+	foreach ($data as $row)
+	{
+		echo '<option value="'.$row['TruyenID'].'">'.$row['Title'].'</option>';
+	}
+?>
+</select></div>
+<label for="file">Chọn tập tin:</label>
+<input type="file" name="file" id="file" />
+<br />
+<input style="margin-top: 5px;" type="submit" value="Submit" onclick="javascript:Loading();"/>
+</form>

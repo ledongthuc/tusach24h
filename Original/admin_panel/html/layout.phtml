@@ -1,0 +1,219 @@
+<?php echo $this->doctype(); ?>  
+<html>   
+<head>
+<?php echo $this->headTitle(); ?>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" /> 
+<script type="text/javascript" src="<?php echo $this->jsdir;?>/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+	function Loading()
+	{
+		$('#loading').css('visibility','visible');
+	}
+</script>
+<style type="text/css">
+*{
+margin:0;
+padding:0;
+}
+input, select{
+height: 21px;
+}
+img{border: none;}
+body{
+font-family: Tahoma, Geneva, sans-serif;
+font-size: 12px;
+line-height: 21px;
+}
+table{
+border-collapse:collapse;	
+width: 100%;
+text-align: left;
+}
+td{
+border: 1px solid #d3d3d3;
+padding:3px 7px 2px 7px;
+}
+/************ Sidebar Accordion Menu ************/
+#sidebar #main-nav {
+width: 206px;
+padding: 0;
+margin: 0 0 0 15px;
+font-family: Helvetica, Arial, sans-serif;
+}
+
+#sidebar #main-nav li {
+list-style: none;
+padding-bottom: 10px;
+text-align: right;
+}
+#sidebar #main-nav li a{
+text-decoration: none;
+}
+#sidebar #main-nav li a.nav-top-item {
+background: transparent url('http://tdkhoa.net/demo/template/SA/resources/images/bg-menu-item-green.gif') right center no-repeat; /* Background image for default color scheme - green */
+padding: 10px 15px;
+color: #fff;
+font-size: 14px;
+cursor: pointer;
+display: block;
+text-decoration: none;
+}
+
+#sidebar #main-nav li a.current {
+background-image: url('http://tdkhoa.net/demo/template/SA/resources/images/bg-menu-item-current.gif') !important;
+color: #333;
+font-weight: bold;
+}
+
+#sidebar #main-nav li a.current:hover {
+color: #333;
+}
+
+#sidebar #main-nav ul {
+padding: 0;
+font-size: 12px;
+margin: 0;
+}
+
+#sidebar #main-nav ul li {
+list-style: none;
+margin: 0;
+text-align: right;
+padding: 0;
+}
+
+#sidebar #main-nav ul li a {
+padding: 8px 15px;
+display: block;
+color: #aaa;
+font-size: 13px;
+line-height: 1.2em;
+}
+
+#sidebar #main-nav ul li a:hover,
+#sidebar #main-nav ul li a.current,
+#sidebar #main-nav ul li a.current:hover {
+color: #fff;
+}
+
+#sidebar #main-nav ul li a.current {
+background: transparent url('http://tdkhoa.net/demo/template/SA/resources/images/menu-current-arrow.gif') right center no-repeat !important;
+}
+
+
+
+</style>
+</head>
+<body>
+
+<div id="sidebar" style="position: fixed; top:0px; left:0px; width:230px;height:100%;background:url(<?php echo $this->imgdir?>/sidebar_bg.png) top left no-repeat;">
+	<div style="padding-top: 30px;padding-bottom: 30px;width: 100%;font-size: 20px;font-weight: bold;text-align: center;color: white;">Admin Panel</div>
+		
+		<ul id="main-nav">  <!-- Accordion Menu -->
+		
+		
+		<li>
+			<a href="#" class="nav-top-item <?php if (Zend_Controller_Front::getInstance()->getRequest()->getControllerName() == 'category'){echo 'current';}?>">
+				Thể loại
+			</a>
+			<ul style="display: none;">
+				<li><a href="<?php echo $this->baseUrl();?>/category/">Danh sách thể loại</a></li>
+				<li><a href="<?php echo $this->baseUrl();?>/category/create">Tạo thể loại</a></li>
+			</ul>
+		</li>
+		
+		<li>
+			<a href="#" class="nav-top-item <?php if (Zend_Controller_Front::getInstance()->getRequest()->getControllerName() == 'story'){echo 'current';}?>">
+				Truyện
+			</a>
+			<ul style="display: none;">
+				<li><a href="<?php echo $this->baseUrl();?>/story/">Danh sách truyện</a></li>
+				<li><a href="<?php echo $this->baseUrl();?>/story/create/">Tạo truyện</a></li>
+				<li><a href="<?php echo $this->baseUrl();?>/story/upload/">Upload ebook .mobi</a></li>
+				<li><a href="<?php echo $this->baseUrl();?>/story/addpage/">Thêm trang</a></li>
+				<li><a href="<?php echo $this->baseUrl();?>/story/censor/">Quản lý / kiểm duyệt</a></li>
+			</ul>
+		</li>
+		
+		<li>
+			<a href="#" class="nav-top-item <?php if (Zend_Controller_Front::getInstance()->getRequest()->getControllerName() == 'comment'){echo 'current';}?>">
+				Comments
+			</a>
+			<ul style="display: none;">
+				<li><a href="#">Danh sách comments</a></li>
+				<li><a href="#">Tìm comment</a></li>
+				<li><a href="#">Xóa comment</a></li>
+			</ul>
+		</li>
+		
+		<li>
+			<a href="#" class="nav-top-item <?php if (Zend_Controller_Front::getInstance()->getRequest()->getControllerName() == 'user'){echo 'current';}?>">
+				Users
+			</a>
+			<ul style="display: none;">
+				<li><a href="#">Danh sách users</a></li>
+				<li><a href="#">Tìm user</a></li>
+				<li><a href="#">Cấm user</a></li>
+				<li><a href="#">Xóa user</a></li>
+				<li><a href="#">Kiểm tra IP</a></li>
+				<li><a href="#">Reset password</a></li>
+			</ul>
+		</li>      
+		
+	</ul> <!-- End #main-nav -->
+	
+</div>
+<div style="width: 591px;left: 270px;position: absolute;top: 20px;height: 1000px;text-align:center;">
+	<div id="loading" style="visibility: hidden; position: absolute; right: 10px; top: -10px;"><img src="<?php echo $this->imgdir;?>/loading.gif"  alt="" /></div>
+	<div style="font-size: 18px; font-weight: bold; text-align: center; margin-bottom: 10px;"><?php echo $this->title;?></div>
+	<div style="height: 15px; width: 100%; background: url(<?php echo $this->imgdir?>/content_wrap_top.png) no-repeat;"></div>
+	<div id="content" style="width: 551px; background: url(<?php echo $this->imgdir?>/content_wrap_mid.png) repeat-y; padding:10px 20px 0 20px;text-align:center;">
+		<?php echo $this->layout()->content; ?>
+	</div>
+	<div style="height: 22px; width: 100%; background: url(<?php echo $this->imgdir?>/content_wrap_bot.png) no-repeat;"></div>
+</div>
+<script type="text/javascript">
+	function DeleteConfirm(val)
+	{
+		if (val == 0)
+			val = "truyện";
+		else if (val == 1)
+			val = "thể loại";
+		return confirm('Bạn muốn xóa '+ val +' này?');
+		
+	}
+	$(document).ready(function(){
+			$('#loading').css('visibility','hidden');
+		//Sidebar Accordion Menu:
+			
+			$("#main-nav li ul").hide(); // Hide all sub menus
+			$("#main-nav li a.current").parent().find("ul").slideToggle("slow"); // Slide down the current menu item's sub menu
+			
+			$("#main-nav li a.nav-top-item").click( // When a top menu item is clicked...
+				function () {
+					$(this).parent().siblings().find("ul").slideUp("normal"); // Slide up all sub menus except the one clicked
+					$(this).next().slideToggle("normal"); // Slide down the clicked sub menu
+					return false;
+				}
+			);
+			
+			$("#main-nav li a.no-submenu").click( // When a menu item with no sub menu is clicked...
+				function () {
+					window.location.href=(this.href); // Just open the link instead of a sub menu
+					return false;
+				}
+			); 
+
+	    // Sidebar Accordion Menu Hover Effect:
+			
+			$("#main-nav li .nav-top-item").hover(
+				function () {
+					$(this).stop().animate({ paddingRight: "25px" }, 200);
+				}, 
+				function () {
+					$(this).stop().animate({ paddingRight: "15px" });
+				}
+			);
+	});
+</script>
+</body></html>

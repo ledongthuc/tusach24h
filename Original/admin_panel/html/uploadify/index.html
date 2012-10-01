@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload</title>
+    <link rel="stylesheet" type="text/css" href="upload.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="upload.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        $('#file').uploadify({
+            'swf'      : 'upload.swf',
+            'uploader' : 'upload.php',
+			'cancelImg':'cancel.png',
+			'folder':'upload',
+			'auto':true,
+			'multi': false,
+			'onUploadSuccess' : function(file, data, response) {
+            alert('The file ' + file.name + ' was successfully uploaded with a response of ' + response + ':' + data);
+			$('#result').html('<img src="../../upload/story_images/' + data + '" alt="" />');
+			} 
+        });
+    });
+    </script>
+</head>
+<body>
+<input type="file" name="file" id="file" />
+<div id="result"></div>
+</body>
+</html>
